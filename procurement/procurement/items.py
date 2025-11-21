@@ -6,7 +6,9 @@
 import scrapy
 
 
-class TutorialItem(scrapy.Item):
+class ProcurementItem(scrapy.Item):
     # define the fields for your item here like:
-    # name = scrapy.Field()
+    # 标题
+    title = scrapy.Field()
+
     pass

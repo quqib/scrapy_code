@@ -9,7 +9,16 @@ from scrapy import signals
 from itemadapter import ItemAdapter
 
 
-class TutorialSpiderMiddleware:
+import logging
+
+class InfoOnSuccessMiddleware:
+    def process_response(self, request, response, spider):
+        if response.status == 200:
+            spider.logger.info("Crawled (200) %s", request.url)
+        return response
+
+
+class ProcurementSpiderMiddleware:
     # Not all methods need to be defined. If a method is not defined,
     # scrapy acts as if the spider middleware does not modify the
     # passed objects.
@@ -53,7 +62,7 @@ class TutorialSpiderMiddleware:
         spider.logger.info("Spider opened: %s" % spider.name)
 
 
-class TutorialDownloaderMiddleware:
+class ProcurementDownloaderMiddleware:
     # Not all methods need to be defined. If a method is not defined,
     # scrapy acts as if the downloader middleware does not modify the
     # passed objects.
@@ -98,3 +107,21 @@ class TutorialDownloaderMiddleware:
 
     def spider_opened(self, spider):
         spider.logger.info("Spider opened: %s" % spider.name)
+
+
+import json
+
+class AutoJsonContentTypeMiddleware:
+    """
+    如果 Request 的 body 是 dict（表示要发 JSON），自动转为 JSON 字符串并设置 Content-Type
+    """
+    def process_request(self, request, spider):
+        # 约定：如果传了 meta["json"] 或 request.json，则视为 JSON 请求
+        if hasattr(request, 'json') and request.json is not None:
+            request.headers["Content-Type"] = "application/json; charset=UTF-8"
+            request.body = json.dumps(request.json).encode("utf-8")
+        elif request.method == "POST" and isinstance(request.body, dict):
+            # 或者更激进：只要 body 是 dict 就当 JSON（不推荐，容易误伤）
+            request.headers["Content-Type"] = "application/json; charset=UTF-8"
+            request.body = json.dumps(request.body).encode("utf-8")
+        return None
