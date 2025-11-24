@@ -8,8 +8,8 @@ from ..core.logger import setup_scrapy_logging
 
 setup_scrapy_logging()
 
-class GuangxiSpider(scrapy.Spider):
-    name = "guangxi"
+class JiangsuSpider(scrapy.Spider):
+    name = "jiangsu"
 
     def __init__(self, cfg=None, **kwargs):
         super().__init__(**kwargs)

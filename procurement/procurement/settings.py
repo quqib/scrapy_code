@@ -41,7 +41,89 @@ PROVINCE_CONFIG = {
                 }
         }
 
-    }
+    },
+
+    "jiang_su": {
+        # 验证码
+        "code": {
+            "url": "http://www.ccgp-jiangsu.gov.cn/pss/servlet/validateCodeServlet",
+            "method": "get",
+            "static_param": {
+                "": ""
+            }
+        },
+        # 主页面
+        "check": {
+            "url": "http://www.ccgp-jiangsu.gov.cn/pss/jsp/search_cggg.jsp",
+            "method": "get",
+            "static_param": {
+                "cgr": "",
+                "xmbh": "",
+                "pqy": "",
+                "sd": "", # 1763683200000
+                "ed": "", # 1764028799000
+                "dljg": "",
+                "cglx": "", # cggg
+                "bt": "",
+                "code": "", # fsj5
+                "nr": "",
+                "cgfs": "", # cgfs001
+                "page": "", # 1
+            }
+        },
+        # 子页面
+        "detail": {
+            "url": "",
+            "method": "post",
+            "static_param": {
+                "ggid": "" # 9bef511ebefa4e8bbebffe50e136ac41
+            }
+        },
+        # 关联页面
+        "related_detail": {
+            "url": "http://www.ccgp-jiangsu.gov.cn/pss/jsp/relevantCgggListByProjId.jsp",
+            "method": "post",
+            "static_param": {
+                "gglb": "", # gkzb
+                "ggid": "", # 9bef511ebefa4e8bbebffe50e136ac41
+                "projId": ""
+            }
+        }
+    },
+
+    "ji_lin": {
+        # 主页面
+        "check": {
+            "url": "http://www.ccgp-jilin.gov.cn/portal/detail",
+            "method": "post",
+            "static_param": {
+                "categoryCode": "", # ZcyAnnouncement2
+                "pageNo": 1,
+                "pageSize": 15,
+                "publishDateBegin": "", # 2025-11-04
+                "publishDateEnd": "", # 2025-11-05
+                "_t": "" # 1763958242000
+            }
+        },
+        # 子页面
+        "detail": {
+            "url": "http://www.ccgp-jilin.gov.cn/portal/detail",
+            "method": "get",
+            "static_param": {
+                "articleId": "", # XGTMBpI3L87SF6AstCDMIw==
+                "parentId": 550068,
+                "timestamp": "" # 1763958366
+            }
+        }
+    },
+
+    # 待定
+    "yun_nan": {
+
+    },
+
+
+
 }
 
 
